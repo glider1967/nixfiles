@@ -1,12 +1,11 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   imports = [
     ./sway/sway.nix
     ./nvim/nvim.nix
   ];
 
   home = rec {
-    username="glider";
+    username = "glider";
     homeDirectory = "/home/${username}";
     stateVersion = "23.05";
   };

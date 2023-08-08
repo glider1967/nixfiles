@@ -20,11 +20,10 @@
         modules = [
           ./configuration.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = {inherit inputs;};
       };
     };
 
-    defaultPackage.x86_64-linux = inputs.home-manager.defaultPackage.x86_64-linux;
     homeConfigurations = {
       myHome = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
@@ -32,9 +31,12 @@
           config.allowUnfree = true;
           overlays = [(import inputs.rust-overlay)];
         };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home.nix ];
+        extraSpecialArgs = {inherit inputs;};
+        modules = [./home.nix];
       };
     };
+
+    formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    defaultPackage.x86_64-linux = inputs.home-manager.defaultPackage.x86_64-linux;
   };
 }

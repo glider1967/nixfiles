@@ -1,10 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, pkgs, ... }:
-
 {
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = ["nix-command" "flakes"];
@@ -17,12 +19,15 @@
   };
 
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-    ] ++ (with inputs.nixos-hardware.nixosModules; [
+    ]
+    ++ (with inputs.nixos-hardware.nixosModules; [
       common-cpu-amd
       common-pc-laptop-ssd
-    ]) ++ [
+    ])
+    ++ [
       # inputs.xremap.nixosModules.default
     ];
 
@@ -131,7 +136,7 @@
   users.users.glider = {
     isNormalUser = true;
     description = "glider";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = ["networkmanager" "wheel" "video"];
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox-wayland
