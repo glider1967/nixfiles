@@ -81,6 +81,7 @@
     };
   };
 
+  services.dbus.enable = true;
   xdg = {
     portal = {
       enable = true;
@@ -101,7 +102,10 @@
 
   services.xserver.displayManager.gdm.enable = true;
   programs.xwayland.enable = true;
-  programs.sway.enable = true;
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -119,15 +123,15 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  # security.rtkit.enable = true;
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   pulse.enable = true;
-  #   jack.enable = true;
-  # };
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -156,8 +160,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #wget
+    vim
+    wget
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
+    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

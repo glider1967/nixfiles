@@ -7,6 +7,7 @@
       menu = "wofi --show run";
       startup = [
         {command = "fcitx5 -d";}
+        {command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway";}
       ];
       bars = [
         {
@@ -36,7 +37,7 @@
       for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
           floating enable
           sticky enable
-          move up 1065 px
+          move up 330 px
           move right 330 px
       }
       for_window [app_id="firefox" title="ピクチャーインピクチャー"] {
@@ -55,16 +56,6 @@
     systemd.enable = true;
     systemd.xdgAutostart = true;
     wrapperFeatures.gtk = true;
-    extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      export XDG_SESSION_TYPE=wayland
-      export XDG_CURRENT_DESKTOP=sway
-      export XDG_CURRENT_SESSION=sway
-      export MOZ_ENABLE_WAYLAND=1
-    '';
   };
 
   programs.waybar = {
