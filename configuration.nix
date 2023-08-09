@@ -6,7 +6,35 @@
   config,
   pkgs,
   ...
-}: {
+}:
+let
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+
+    text = ''
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
+  };
+
+  configure-gtk = pkgs.writeTextFile {
+    name = "configure-gtk";
+    destination = "/bin/configure-gtk";
+    executable = true;
+    text = let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+      gsettings set $gnome_schema gtk-theme 'Dracula'
+    '';
+  };
+in
+{
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = ["nix-command" "flakes"];
@@ -28,7 +56,7 @@
       common-pc-laptop-ssd
     ])
     ++ [
-      # inputs.xremap.nixosModules.default
+      ./cachix.nix
     ];
 
   # Bootloader.
@@ -95,6 +123,9 @@
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     XDG_CURRENT_DESKTOP = "sway";
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
   };
 
   # Enable the X11 windowing system.
@@ -143,7 +174,6 @@
     extraGroups = ["networkmanager" "wheel" "video"];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      firefox-wayland
       git
       vim
     ];
@@ -166,6 +196,16 @@
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     git
+    dbus-sway-environment
+    configure-gtk
+    wayland
+    xdg-utils # for opening default programs when clicking links
+    glib # gsettings
+    dracula-theme # gtk theme
+    mako # notification system developed by swaywm maintainer
+    wdisplays # tool to configure displays
+
+    cachix
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

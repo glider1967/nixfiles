@@ -1,14 +1,10 @@
 {pkgs, ...}: {
-  wayland.windowManager.sway = {
+  wayland.windowManager.sway = rec {
     enable = true;
-    config = rec {
+    config = {
       modifier = "Mod4";
       terminal = "wezterm";
-      menu = "wofi --show run";
-      startup = [
-        {command = "fcitx5 -d";}
-        {command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway";}
-      ];
+      menu = "wofi -G --show run";
       bars = [
         {
           position = "top";
@@ -34,6 +30,10 @@
     };
 
     extraConfig = ''
+      exec fcitx5 -d
+      exec dbus-sway-environment
+      exec configure-gtk
+
       for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
           floating enable
           sticky enable
