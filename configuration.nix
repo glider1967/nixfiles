@@ -124,12 +124,15 @@ in {
     GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
+    LIBSEAT_BACKEND = "logind";
   };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm = {
+    enable = true;
+  };
   programs.xwayland.enable = true;
   programs.sway = {
     enable = true;

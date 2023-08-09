@@ -3,10 +3,14 @@
     enable = true;
     viAlias = true;
     plugins = with pkgs.vimPlugins; [
+      comment-nvim
+      scrollbar-nvim
+
       telescope-nvim
       nightfox-nvim
       lualine-nvim
       toggleterm-nvim
+      neo-tree-nvim
 
       nvim-web-devicons
       bufferline-nvim
@@ -19,6 +23,8 @@
       cmp-path
       cmp-cmdline
       cmp-nvim-lua
+      cmp-vsnip
+      vim-vsnip
       cmp-git
 
       nvim-lspconfig

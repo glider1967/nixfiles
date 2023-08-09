@@ -7,7 +7,7 @@ opt.backup = false
 opt.hidden = true
 opt.clipboard = "unnamedplus"
 
-opt.number = true
+opt.relativenumber = true
 opt.list = true
 opt.smartindent = true
 opt.listchars = {tab = '>-', trail = '*', nbsp = '+'}
@@ -42,3 +42,24 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
 }
+
+require'Comment'.setup()
+
+require'toggleterm'.setup{
+  open_mapping = [[<c-t>]]
+}
+
+require'neo-tree'.setup{}
+vim.cmd([[nnoremap <leader>f :Neotree reveal<cr>]])
+
+local scrollbar = require'scrollbar'
+vim.api.nvim_create_autocmd({"WinScrolled", "VimResized", "QuitPre"}, {
+  callback = function() scrollbar.show() end
+})
+vim.api.nvim_create_autocmd({"WinEnter", "FocusGained"}, {
+  callback = function() scrollbar.show() end
+})
+vim.api.nvim_create_autocmd({"WinLeave", "BufLeave",
+    "BufWinLeave", "FocusLost"}, {
+  callback = function() scrollbar.clear() end
+})
