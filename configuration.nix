@@ -6,8 +6,7 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   dbus-sway-environment = pkgs.writeTextFile {
     name = "dbus-sway-environment";
     destination = "/bin/dbus-sway-environment";
@@ -33,8 +32,7 @@ let
       gsettings set $gnome_schema gtk-theme 'Dracula'
     '';
   };
-in
-{
+in {
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = ["nix-command" "flakes"];

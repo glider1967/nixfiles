@@ -7,21 +7,6 @@ opt.backup = false
 opt.hidden = true
 opt.clipboard = "unnamedplus"
 
-if vim.fn.has('unix') == 1 then
-  vim.g.clipboard = {
-  name = "wl-clipboard",
-  copy = {
-      ["+"] = "wl-copy",
-      ["*"] = "wl-copy",
-    },
-  paste = {
-      ["+"] = "wl-paste",
-      ["*"] = "wl-paste",
-    },
-  cache_enable = 0,
-  }
-end
-
 opt.number = true
 opt.list = true
 opt.smartindent = true
