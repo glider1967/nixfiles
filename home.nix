@@ -16,6 +16,16 @@
     exa
     fd
     ripgrep
+    zoxide
+    navi
+    fzf
+    pastel
+    du-dust
+    bottom
+    sd
+    procs
+
+    nushell
 
     gcc
     deno
@@ -27,7 +37,9 @@
     nixd
 
     firefox-wayland
-  ];
+    google-chrome
+
+];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
