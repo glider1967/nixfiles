@@ -27,6 +27,9 @@
           natural_scroll = "enabled";
         };
       };
+      output = {
+        "*" = { bg = "~/wallpaper.png fill"; };
+      };
     };
 
     extraConfig = ''
@@ -333,7 +336,13 @@
     '';
   };
   programs.wofi.enable = true;
-  services.swayidle.enable = true;
+  programs.swaylock.enable = true;
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      { timeout = 120; command = "swaylock -fF"; }
+    ];
+  };
 
   home.packages = with pkgs; [
     wl-clipboard
