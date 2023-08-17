@@ -74,6 +74,7 @@
         modules-left = ["sway/workspaces" "sway/mode" "wlr/taskbar"];
         modules-center = ["clock"];
         modules-right = [
+          "network"
           "cpu"
           "memory"
           "temperature"
@@ -86,6 +87,10 @@
         "sway/workspaces" = {
           disable-scroll = true;
           all-outputs = true;
+        };
+        "network" = {
+          format-wifi = "{essid} ({signalStrength}%)";
+          format-disconnected = "discon.";
         };
         "cpu" = {
           format = "{}% ";
@@ -195,13 +200,11 @@
       #network,
       #pulseaudio,
       #disk,
-      #tray,
       #mode,
       #bluetooth,
       #temperature {
         padding: 0 10px;
         color: #e5e5e5;
-        /* color: #bf616a; */
         border-radius: 9.5px;
         background-color: #1f2530;
       }
@@ -215,22 +218,22 @@
 
       #cpu {
         color: #fb958b;
-        background-color: #1f2530;
       }
 
       #memory {
         color: #ebcb8b;
-        background-color: #1f2530;
       }
 
       #disk {
         color: @peach;
-        background-color: #1f2530;
       }
 
       #temperature {
         color: @yellow;
-        background-color: #1f2530;
+      }
+
+      #network {
+        color: @blue;
       }
 
       /* If workspaces is the leftmost module, omit left margin */
@@ -263,7 +266,6 @@
       #battery.full,
       #battery.plugged {
         color: #26a65b;
-        /* background-color: #26a65b; */
       }
 
       @keyframes blink {
@@ -336,11 +338,20 @@
     '';
   };
   programs.wofi.enable = true;
-  programs.swaylock.enable = true;
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      ignore-empty-password = true;
+      color = "1f2530";
+      font = "JetBrainsMono Nerd Font";
+      font-size = 24;
+    };
+  };
   services.swayidle = {
     enable = true;
     timeouts = [
-      { timeout = 120; command = "swaylock -fF"; }
+      { timeout = 120; command = "${pkgs.swaylock}/bin/swaylock -fF"; }
+      { timeout = 1200; command = "systemctl suspend"; }
     ];
   };
 

@@ -184,6 +184,11 @@ in {
   programs.light.enable = true;
   programs.noisetorch.enable = true;
   security.polkit.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -227,6 +232,18 @@ in {
   };
 
   services.openssh.enable = true;
+
+  services.flatpak.enable = true;
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true; # $DOCKER_HOST
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
