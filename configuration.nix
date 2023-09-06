@@ -177,6 +177,8 @@ in {
     packages = with pkgs; [
       git
       vim
+
+      elan
     ];
   };
 

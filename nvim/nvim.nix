@@ -36,6 +36,8 @@
       nvim-treesitter-parsers.rust
       nvim-treesitter-parsers.lua
       nvim-treesitter-parsers.nix
+
+      lean-nvim
     ];
     extraLuaConfig = builtins.readFile ./init.lua;
   };

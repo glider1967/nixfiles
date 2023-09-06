@@ -38,7 +38,6 @@
 
     firefox-wayland
     google-chrome
-
 ];
 
   home.sessionVariables = {

@@ -36,6 +36,7 @@ vim.cmd("source ~/nixfiles/nvim/telescope.lua")
 vim.cmd("source ~/nixfiles/nvim/lspconfig.lua")
 vim.cmd("source ~/nixfiles/nvim/lspsaga.lua")
 vim.cmd("source ~/nixfiles/nvim/cmp.lua")
+vim.cmd("source ~/nixfiles/nvim/lean.lua")
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
