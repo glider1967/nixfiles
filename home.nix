@@ -35,9 +35,6 @@
     lua-language-server
     rust-analyzer
     nixd
-
-    firefox-wayland
-    google-chrome
 ];
 
   home.sessionVariables = {

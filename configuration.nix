@@ -178,7 +178,13 @@ in {
       git
       vim
 
+      vivaldi
+      vivaldi-ffmpeg-codecs
+
       elan
+
+      openvpn
+      networkmanager-openvpn
     ];
   };
 
