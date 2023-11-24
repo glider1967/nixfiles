@@ -165,6 +165,17 @@ in {
     jack.enable = true;
   };
 
+  # USB Mount
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -220,6 +231,9 @@ in {
     wdisplays # tool to configure displays
 
     cachix
+
+    libimobiledevice
+    ifuse
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
