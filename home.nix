@@ -33,6 +33,7 @@
     rust-bin.stable.latest.default
 
     lua-language-server
+    nodePackages.typescript-language-server
     rust-analyzer
     nixd
 ];
