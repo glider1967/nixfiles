@@ -26,6 +26,7 @@
     procs
 
     nushell
+    vscode
 
     gcc
     deno
