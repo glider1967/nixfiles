@@ -69,6 +69,9 @@
       ll = "exa --long --all --git --icons";
       tree = "exa --icons --classify --tree";
     };
+    profileExtra = ''
+      export PATH="$HOME/.npm-global:$PATH"
+    '';
   };
   programs.starship.enable = true;
 

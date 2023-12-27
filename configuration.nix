@@ -65,6 +65,9 @@ in {
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.extraHosts = ''
+    104.16.1.35 registry.npmjs.org
+  '';
 
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
@@ -234,6 +237,8 @@ in {
 
     libimobiledevice
     ifuse
+
+    nodejs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
