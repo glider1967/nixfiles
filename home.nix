@@ -27,6 +27,7 @@
 
     nushell
     vscode
+    chromium
 
     gcc
     deno

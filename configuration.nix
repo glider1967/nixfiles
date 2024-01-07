@@ -179,6 +179,9 @@ in {
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  # wtf swaylock!?
+  security.pam.services.swaylock = {};
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
